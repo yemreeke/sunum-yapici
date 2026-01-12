@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['localhost', '127.0.0.1'],
+    domains: ["yemreeke.dev", 'localhost', '127.0.0.1'],
   },
   trailingSlash: true,
   output: 'export',

@@ -225,7 +225,7 @@ export default function Home() {
     }, 100);
   };
 
-  const updateSlide = (index: number, field: keyof SlideData, value: any) => {
+  const updateSlide = <K extends keyof SlideData>(index: number, field: K, value: SlideData[K]) => {
     const newSlides = [...slides];
     newSlides[index] = { ...newSlides[index], [field]: value };
     setSlides(newSlides);
@@ -342,7 +342,7 @@ export default function Home() {
                         <Label>Genel Tema</Label>
                         <Select
                           value={globalSettings.theme}
-                          onValueChange={(value: any) => setGlobalSettings({ ...globalSettings, theme: value })}
+                          onValueChange={(value: GlobalSettings['theme']) => setGlobalSettings({ ...globalSettings, theme: value })}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Tema seçin" />
@@ -541,7 +541,7 @@ export default function Home() {
                           <Label>Cihaz Tipi</Label>
                           <Select
                             value={slides[currentSlide - 1].deviceType || 'iphone'}
-                            onValueChange={(value) => updateSlide(currentSlide - 1, 'deviceType', value)}
+                            onValueChange={(value) => updateSlide(currentSlide - 1, 'deviceType', value as 'iphone' | 'macbook')}
                           >
                             <SelectTrigger>
                               <SelectValue placeholder="Cihaz seçin" />
@@ -600,7 +600,7 @@ export default function Home() {
                         <Label>Düzen (Görsel Konumu)</Label>
                         <Select
                           value={slides[currentSlide - 1].layout || 'left'}
-                          onValueChange={(value) => updateSlide(currentSlide - 1, 'layout', value)}
+                          onValueChange={(value) => updateSlide(currentSlide - 1, 'layout', value as 'left' | 'right')}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Düzen seçin" />
@@ -615,7 +615,7 @@ export default function Home() {
                         <Label>Renk Teması</Label>
                         <Select
                           value={slides[currentSlide - 1].theme || 'cyan'}
-                          onValueChange={(value) => updateSlide(currentSlide - 1, 'theme', value)}
+                          onValueChange={(value) => updateSlide(currentSlide - 1, 'theme', value as SlideData['theme'])}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Tema seçin" />
@@ -834,6 +834,12 @@ export default function Home() {
                     </Button>
                   </div>
                 </div>
+
+                <div className="mt-auto p-4 text-center border-t border-gray-100">
+                  <p className="text-[10px] text-gray-400">
+                    Copyright yemreeke.com yemreeke.dev
+                  </p>
+                </div>
               </TabsContent>
             </Tabs>
           </div>
@@ -1045,6 +1051,11 @@ export default function Home() {
             </div>
           </div>
 
+          <div className="py-12 bg-gray-50 text-center print:hidden border-t border-gray-100">
+            <p className="text-gray-400 text-sm">
+              Copyright yemreeke.com yemreeke.dev
+            </p>
+          </div>
           <style>{`
             @media print {
               @page {
