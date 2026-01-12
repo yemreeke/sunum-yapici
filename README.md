@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Sunum Yapıcı
 
-## Getting Started
+**Sunum Yapıcı**, mobil uygulama geliştiricileri, web tasarımcıları ve ürün yöneticileri için geliştirilmiş, hızlı ve pratik bir sunum hazırlama aracıdır. Karmaşık tasarım araçlarıyla vakit kaybetmeden, dakikalar içinde profesyonel sunumlar oluşturmanıza olanak tanır.
 
-First, run the development server:
+🔗 **Canlı Önizleme:** [sunumyapici.yemreeke.dev](https://sunumyapici.yemreeke.dev)
+
+---
+
+## ✨ Özellikler
+
+- **📱 Cihaz Mockup'ları:** iPhone ve MacBook mockup'ları ile ekran görüntülerinizi gerçekçi cihazlar üzerinde sergileyin.
+- **🎨 Özelleştirilebilir Temalar:** 5 farklı renk teması ve zengin gradyan seçenekleri ile her sayfayı markanıza uygun hale getirin.
+- **📐 Dinamik Düzen:** Görsellerinizi sağa veya sola yaslayarak metinlerinizle mükemmel uyumu yakalayın.
+- **📂 Sayfa Yönetimi:** Sınırsız sayıda sayfa ekleyin, silin ve sıralamayı dilediğiniz gibi değiştirin.
+- **📄 PDF Çıktısı:** Hazırladığınız sunumu anında profesyonel bir PDF dosyasına dönüştürün ve paylaşın.
+- **💾 Veri Kalıcılığı:** Yaptığınız değişiklikler tarayıcınıza kaydedilir, sayfayı yenileseniz bile verileriniz kaybolmaz.
+- **🌑 Dark Mode Desteği:** Modern arayüzü ile hem aydınlık hem de karanlık modda konforlu çalışma imkanı.
+
+---
+
+## 🛠️ Teknoloji Yığını
+
+- **Framework:** [Next.js 15+](https://nextjs.org/) (App Router & Turbopack)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **UI Components:** [Radix UI](https://www.radix-ui.com/) & [Shadcn UI](https://ui.shadcn.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Deployment:** Docker & Nginx
+
+---
+
+## 🚀 Hızlı Başlangıç
+
+### Yerel Geliştirme
+
+Projeyi yerel makinenizde çalıştırmak için:
+
+1. Depoyu klonlayın:
+   ```bash
+   git clone https://github.com/yemreeke/sunum-yapici.git
+   ```
+
+2. Bağımlılıkları yükleyin:
+   ```bash
+   npm install
+   # veya
+   yarn install
+   ```
+
+3. Geliştirme sunucusunu başlatın:
+   ```bash
+   npm run dev
+   # veya
+   yarn dev
+   ```
+
+4. Tarayıcınızda `http://localhost:3000` adresine gidin.
+
+### Docker ile Çalıştırma
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker build -t sunum-yapici -f Dockerfile.production .
+docker run -p 80:80 sunum-yapici
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📝 Lisans
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Bu proje bir **yemreeke.dev** girişimidir. Kişisel ve ticari kullanıma uygundur.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🤝 İletişim
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Geliştirici: **Emre Eke**
+- Web: [yemreeke.com](https://yemreeke.com)
+- Blog: [yemreeke.dev](https://yemreeke.dev)
+- GitHub: [@yemreeke](https://github.com/yemreeke)
