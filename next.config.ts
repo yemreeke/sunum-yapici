@@ -2,11 +2,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["yemreeke.dev", 'localhost', '127.0.0.1'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'yemreeke.dev' },
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'http', hostname: '127.0.0.1' },
+    ],
+    unoptimized: true
   },
   trailingSlash: true,
   output: 'export',
-  distDir: 'build',
+  distDir: 'out',
 };
 
 export default nextConfig;
