@@ -293,7 +293,7 @@ export default function Home() {
           <div className="w-96 bg-white border-r border-gray-200 overflow-y-auto">
             <div className="p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold">Editör</h2>
+                <h1 className="text-2xl font-bold text-cyan-700">Sunum Yapıcı</h1>
                 <div className="bg-gray-100 px-3 py-1 rounded-full text-xs font-semibold text-gray-500">
                   {slides.length + 2} Toplam Sayfa
                 </div>
@@ -847,7 +847,10 @@ export default function Home() {
           {/* Right Panel - Live Preview */}
           <div className="flex-1 overflow-y-auto bg-gray-100 p-8">
             <div className="max-w-6xl mx-auto space-y-8">
-              <h3 className="text-xl text-gray-600 font-semibold">Canlı Önizleme</h3>
+              <h3 className="text-xl text-gray-600 font-semibold flex items-center gap-2">
+                <Layout className="h-5 w-5" />
+                Dinamik Önizleme
+              </h3>
 
               {/* Preview of current slide */}
               {currentSlide === 0 && (
