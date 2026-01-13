@@ -144,6 +144,8 @@ export default function Home() {
 
   const [presentationMode, setPresentationMode] = useState(false);
   const [presentationSlide, setPresentationSlide] = useState(0); // 0=cover, 1-n=slides, n+1=end
+  const [saveStatus, setSaveStatus] = useState<'saving' | 'saved' | 'idle'>('idle');
+  const [lastSaved, setLastSaved] = useState<string | null>(null);
 
   const handleReset = () => {
     if (window.confirm('Tüm verileri silip varsayılan ayarlara dönmek istediğinize emin misiniz?')) {
@@ -182,41 +184,25 @@ export default function Home() {
     loadData();
   }, []);
 
-  // Save slides to localStorage whenever they change
-  useEffect(() => {
-    try {
-      localStorage.setItem('presentation-slides', JSON.stringify(slides));
-    } catch (error) {
-      console.error('Slides kaydetme hatası:', error);
-    }
-  }, [slides]);
-
-  // Save cover data to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem('presentation-cover', JSON.stringify(coverData));
-    } catch (error) {
-      console.error('Cover data kaydetme hatası:', error);
-    }
-  }, [coverData]);
-
-  // Save end data to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem('presentation-end', JSON.stringify(endData));
-    } catch (error) {
-      console.error('End data kaydetme hatası:', error);
-    }
-  }, [endData]);
-
   // Save global settings to localStorage
   useEffect(() => {
     try {
+      setSaveStatus('saving');
+      localStorage.setItem('presentation-slides', JSON.stringify(slides));
+      localStorage.setItem('presentation-cover', JSON.stringify(coverData));
+      localStorage.setItem('presentation-end', JSON.stringify(endData));
       localStorage.setItem('presentation-settings', JSON.stringify(globalSettings));
+
+      setSaveStatus('saved');
+      setLastSaved(new Date().toLocaleTimeString('tr-TR'));
+
+      const timer = setTimeout(() => setSaveStatus('idle'), 2000);
+      return () => clearTimeout(timer);
     } catch (error) {
-      console.error('Global settings kaydetme hatası:', error);
+      console.error('Kaydetme hatası:', error);
+      setSaveStatus('idle');
     }
-  }, [globalSettings]);
+  }, [slides, coverData, endData, globalSettings]);
 
   const handlePrint = () => {
     setEditMode(false);
@@ -293,7 +279,15 @@ export default function Home() {
           <div className="w-96 bg-white border-r border-gray-200 overflow-y-auto">
             <div className="p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
               <div className="flex items-center justify-between mb-4">
-                <h1 className="text-2xl font-bold text-cyan-700">Sunum Yapıcı</h1>
+                <div>
+                  <h1 className="text-2xl font-bold text-cyan-700">Sunum Yapıcı</h1>
+                  {saveStatus !== 'idle' || lastSaved ? (
+                    <div className="text-[10px] text-gray-400 mt-1 flex items-center gap-1">
+                      <div className={`w-1.5 h-1.5 rounded-full ${saveStatus === 'saving' ? 'bg-amber-400 animate-pulse' : 'bg-green-500'}`}></div>
+                      {saveStatus === 'saving' ? 'Kaydediliyor...' : `Otomatik kaydedildi: ${lastSaved}`}
+                    </div>
+                  ) : null}
+                </div>
                 <div className="bg-gray-100 px-3 py-1 rounded-full text-xs font-semibold text-gray-500">
                   {slides.length + 2} Toplam Sayfa
                 </div>
@@ -956,7 +950,7 @@ export default function Home() {
 
           {/* Cover Page */}
           <div
-            className={`min-h-screen print:h-[210mm] print:w-[297mm] flex flex-col items-center justify-center p-8 text-white print:break-after-page overflow-hidden print-page ${coverData.gradient || (!coverData.customBackgroundColor ? globalSettings.gradient : '') || 'bg-gradient-to-br from-cyan-500 to-cyan-600'}`}
+            className={`min-h-screen print:h-[210mm] print:w-[297mm] flex flex-col items-center justify-center p-8 text-white print:break-after-page overflow-hidden print-page print:scale-100 print:origin-center ${coverData.gradient || (!coverData.customBackgroundColor ? globalSettings.gradient : '') || 'bg-gradient-to-br from-cyan-500 to-cyan-600'}`}
             style={coverData.customBackgroundColor && !coverData.gradient ? { backgroundColor: coverData.customBackgroundColor } : (!coverData.gradient && !coverData.customBackgroundColor && globalSettings.customBackgroundColor && !globalSettings.gradient ? { backgroundColor: globalSettings.customBackgroundColor } : {})}
           >
             <div className="text-center space-y-8">
@@ -979,7 +973,7 @@ export default function Home() {
             return (
               <div
                 key={slide.id}
-                className={`min-h-screen print:h-[210mm] print:w-[297mm] flex items-center justify-center p-8 lg:p-16 print:p-0 print:break-after-page overflow-hidden print-page ${slide.gradient || (!slide.customBackgroundColor ? globalSettings.gradient : '') || 'bg-white'} ${slide.backgroundColor || ''}`}
+                className={`min-h-screen print:h-[210mm] print:w-[297mm] flex items-center justify-center p-8 lg:p-16 print:p-0 print:break-after-page overflow-hidden print-page print:scale-100 print:origin-center ${slide.gradient || (!slide.customBackgroundColor ? globalSettings.gradient : '') || 'bg-white'} ${slide.backgroundColor || ''}`}
                 style={slide.customBackgroundColor && !slide.gradient ? { backgroundColor: slide.customBackgroundColor } : (!slide.gradient && !slide.customBackgroundColor && globalSettings.customBackgroundColor && !globalSettings.gradient ? { backgroundColor: globalSettings.customBackgroundColor } : {})}
               >
                 <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-12 items-center print:gap-8 print:max-w-none print:px-12">

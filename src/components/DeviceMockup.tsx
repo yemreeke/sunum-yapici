@@ -9,15 +9,15 @@ export function DeviceMockup({ type, image, placeholderText = 'Görsel yükleyin
     return (
       <div className="inline-block scale-100 origin-top">
         {/* MacBook Air Mockup */}
-        <div className="relative">
+        <div className="relative print:shadow-none">
           {/* Screen */}
-          <div className="bg-gray-900 rounded-t-2xl p-3 shadow-2xl">
+          <div className="bg-gray-900 rounded-t-2xl p-3 shadow-2xl print:shadow-none print:border print:border-gray-800">
             <div className="bg-black rounded-lg overflow-hidden relative" style={{ width: '600px', height: '375px' }}>
               {/* Notch */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-900 rounded-b-2xl z-10"></div>
 
               {/* Screen Content */}
-              <div className="w-full h-full bg-gray-100">
+              <div className="w-full h-full bg-black">
                 {image ? (
                   <img
                     src={image}
@@ -39,11 +39,13 @@ export function DeviceMockup({ type, image, placeholderText = 'Görsel yükleyin
             <div className="h-1 bg-gradient-to-b from-gray-800 to-gray-700"></div>
             {/* Keyboard base */}
             <div
-              className="bg-gradient-to-b from-gray-300 to-gray-400 rounded-b-2xl shadow-xl"
+              className="bg-gradient-to-b from-gray-300 to-gray-400 rounded-b-2xl shadow-xl print:shadow-none print:bg-gray-300"
               style={{
                 width: '640px',
                 height: '20px',
-                marginLeft: '-20px'
+                marginLeft: '-20px',
+                position: 'relative',
+                zIndex: -1
               }}
             >
               <div className="w-full h-full bg-gradient-to-b from-gray-200/50 to-transparent rounded-b-2xl"></div>
@@ -56,8 +58,8 @@ export function DeviceMockup({ type, image, placeholderText = 'Görsel yükleyin
 
   // iPhone 17 Pro Mockup
   return (
-    <div className="inline-block">
-      <div className="relative bg-gray-900 rounded-[3.5rem] shadow-2xl p-3" style={{ width: '340px', height: '690px' }}>
+    <div className="inline-block print:p-4">
+      <div className="relative bg-gray-900 rounded-[3.5rem] shadow-2xl p-3 print:shadow-none print:border print:border-gray-800" style={{ width: '340px', height: '690px' }}>
         {/* Dynamic Island */}
         <div className="absolute top-6 left-1/2 -translate-x-1/2 w-32 h-9 bg-black rounded-full z-20"></div>
 
@@ -70,7 +72,7 @@ export function DeviceMockup({ type, image, placeholderText = 'Görsel yükleyin
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+            <div className="w-full h-full bg-zinc-900 flex items-center justify-center">
               <p className="text-gray-400 text-sm px-6 text-center">{placeholderText}</p>
             </div>
           )}

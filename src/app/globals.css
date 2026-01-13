@@ -130,6 +130,36 @@
     @apply bg-background text-foreground;
   }
 
+  /* Print specific fixes for PDF generation */
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      background: white !important;
+    }
+
+    /* Remove shadows that often render as grey boxes in PDFs */
+    .shadow-xl, .shadow-2xl, .shadow-md {
+      box-shadow: none !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Fix scaling artifacts */
+    .print-page {
+      width: 297mm !important;
+      height: 210mm !important;
+      overflow: hidden !important;
+      position: relative !important;
+    }
+
+    /* Ensure backgrounds and gradients are solid */
+    .bg-white { background-color: white !important; }
+    .bg-black { background-color: black !important; }
+  }
+
   /**
   * Default typography styles for HTML elements (h1-h4, p, label, button, input).
   * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
